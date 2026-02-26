@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngiCalc — Engineering Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⚙</span>
+        <span class="logo-text">Berozgar<span class="accent">Engineers</span></span>
+      </div>
+      <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+        <span class="theme-icon">☀</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== NAV TABS ===== -->
+     
+  <nav class="tab-nav" id="tabNav">
+    <button class="tab-btn active" data-tab="basic">
+      <span class="tab-icon">🔢</span>
+      <span class="tab-label">Basic</span>
+    </button>
+    <button class="tab-btn" data-tab="interest">
+      <span class="tab-icon">💰</span>
+      <span class="tab-label">Interest</span>
+    </button>
+    <button class="tab-btn" data-tab="geometry">
+      <span class="tab-icon">📐</span>
+      <span class="tab-label">Geometry</span>
+    </button>
+    <button class="tab-btn" data-tab="trig">
+      <span class="tab-icon">📊</span>
+      <span class="tab-label">Trigometry</span>
+    </button>
+    <button class="tab-btn" data-tab="numbers">
+      <span class="tab-icon">🔣</span>
+      <span class="tab-label">Numbers</span>
+    </button>
+    <button class="tab-btn" data-tab="AmanBanik">
+      <span class="tab-icon">⚗</span>
+      <span class="tab-label">Engineering</span>
+    </button>
+  </nav>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="app-main">
+
+    <!-- ===================== MODULE 1: BASIC CALCULATOR ===================== -->
+    <!--Prompt prepare by chatgpt -->
+    <!-- code genrated by claude Ai-->
+    <section class="calc-section active" id="basic">
+      <div class="section-header">
+        <h2>Basic Calculation</h2>
+        <p class="section-desc">Standard arithmetic & algebraic operations</p>
+      </div>
+      <div class="basic-calc-wrapper">
+        <div class="calc-display">
+          <div class="display-expr" id="basicExpr">&nbsp;</div>
+          <div class="display-result" id="basicDisplay">0</div>
+        </div>
+        <div class="calc-grid">
+          <!-- Row 1 -->
+          <button class="calc-btn fn" onclick="basicFn('clear')">C</button>
+          <button class="calc-btn fn" onclick="basicFn('sign')">+/−</button>
+          <button class="calc-btn fn" onclick="basicFn('percent')">%</button>
+          <button class="calc-btn op" onclick="basicOp('÷')">÷</button>
+          <!-- Row 2 -->
+          <button class="calc-btn num" onclick="basicNum('7')">7</button>
+          <button class="calc-btn num" onclick="basicNum('8')">8</button>
+          <button class="calc-btn num" onclick="basicNum('9')">9</button>
+          <button class="calc-btn op" onclick="basicOp('×')">×</button>
+          <!-- Row 3 -->
+          <button class="calc-btn num" onclick="basicNum('4')">4</button>
+          <button class="calc-btn num" onclick="basicNum('5')">5</button>
+          <button class="calc-btn num" onclick="basicNum('6')">6</button>
+          <button class="calc-btn op" onclick="basicOp('−')">−</button>
+          <!-- Row 4 -->
+          <button class="calc-btn num" onclick="basicNum('1')">1</button>
+          <button class="calc-btn num" onclick="basicNum('2')">2</button>
+          <button class="calc-btn num" onclick="basicNum('3')">3</button>
+          <button class="calc-btn op" onclick="basicOp('+')">+</button>
+          <!-- Row 5 -->
+          <button class="calc-btn num span2" onclick="basicNum('0')">0</button>
+          <button class="calc-btn num" onclick="basicNum('.')">.</button>
+          <button class="calc-btn eq" onclick="basicEquals()">=</button>
+        </div>
+        <!-- Extra Functions -->
+        <div class="extra-ops">
+          <button class="extra-btn" onclick="basicFn('sqrt')">√x</button>
+          <button class="extra-btn" onclick="basicFn('square')">x²</button>
+          <button class="extra-btn" onclick="basicFn('backspace')">⌫</button>
+          <button class="extra-btn op-btn" onclick="basicOp('^')">xʸ</button>
+        </div>
+      </div>
+      <footer><p align="center">Press Backspace Before enter your second number</p></footer>
+    </section>
+
+    <!-- ===================== MODULE 2: INTEREST CALCULATOR ===================== -->
+    <section class="calc-section" id="interest">
+      <div class="section-header">
+        <h2>Interest Calculation</h2>
+        <p class="section-desc">Simple & Compound Interest with step-by-step solutions</p>
+      </div>
+
+      <div class="interest-toggle">
+        <button class="itoggle-btn active" id="siBtn" onclick="switchInterest('si')">Simple Interest</button>
+        <button class="itoggle-btn" id="ciBtn" onclick="switchInterest('ci')">Compound Interest</button>
+      </div>
+
+      <!-- Simple Interest -->
+     
+      <div class="interest-panel" id="siPanel">
+        <div class="formula-box">
+          <span class="formula-label">Formula:</span>
+          <span class="formula-text">SI = (P × R × T) / 100</span>
+        </div>
+        <div class="input-grid">
+          <div class="input-group">
+            <label>Principal (P) — ₹ or $</label>
+            <input type="number" id="siP" placeholder="e.g. 10000" min="0" />
+          </div>
+          <div class="input-group">
+            <label>Rate of Interest (R) — % per year</label>
+            <input type="number" id="siR" placeholder="e.g. 8.5" min="0" />
+          </div>
+          <div class="input-group">
+            <label>Time (T) — years</label>
+            <input type="number" id="siT" placeholder="e.g. 3" min="0" />
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="calc-action-btn" onclick="calcSI()">Calculate SI</button>
+          <button class="reset-btn" onclick="resetSI()">Reset</button>
+        </div>
+        <div class="result-box" id="siResult" style="display:none;"></div>
+      </div>
+
+      <!-- Compound Interest -->
+      <div class="interest-panel" id="ciPanel" style="display:none;">
+        <div class="formula-box">
+          <span class="formula-label">Formula:</span>
+          <span class="formula-text">A = P × (1 + R/100n)^(nT)</span>
+        </div>
+        <div class="input-grid">
+          <div class="input-group">
+            <label>Principal (P)</label>
+            <input type="number" id="ciP" placeholder="e.g. 10000" min="0" />
+          </div>
+          <div class="input-group">
+            <label>Annual Rate (R) — %</label>
+            <input type="number" id="ciR" placeholder="e.g. 10" min="0" />
+          </div>
+          <div class="input-group">
+            <label>Time (T) — years</label>
+            <input type="number" id="ciT" placeholder="e.g. 5" min="0" />
+          </div>
+          <div class="input-group">
+            <label>Compounding Frequency (n)</label>
+            <select id="ciN">
+              <option value="1">Annually (n=1)</option>
+              <option value="2">Semi-Annually (n=2)</option>
+              <option value="4">Quarterly (n=4)</option>
+              <option value="12" selected>Monthly (n=12)</option>
+              <option value="365">Daily (n=365)</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="calc-action-btn" onclick="calcCI()">Calculate CI</button>
+          <button class="reset-btn" onclick="resetCI()">Reset</button>
+        </div>
+        <div class="result-box" id="ciResult" style="display:none;"></div>
+      </div>
+    </section>
+
+    <!-- ===================== MODULE 3: GEOMETRY ===================== -->
+    <section class="calc-section" id="geometry">
+      <div class="section-header">
+        <h2>Area & Perimeter Calculation</h2>
+        <p class="section-desc">All common shapes — area, perimeter & formulas</p>
+      </div>
+
+      <div class="shape-selector">
+        <button class="shape-btn active" data-shape="square">Square</button>
+        <button class="shape-btn" data-shape="rectangle">Rectangle</button>
+        <button class="shape-btn" data-shape="circle">Circle</button>
+        <button class="shape-btn" data-shape="triangle">Triangle</button>
+        <button class="shape-btn" data-shape="parallelogram">Parallelogram</button>
+        <button class="shape-btn" data-shape="rhombus">Rhombus</button>
+        <button class="shape-btn" data-shape="trapezium">Trapezium</button>
+        <button class="shape-btn" data-shape="ellipse">Ellipse</button>
+      </div>
+
+      <div class="shape-panel" id="shapePanel">
+        <!-- Dynamically rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ===================== MODULE 4: TRIGONOMETRY ===================== -->
+    <section class="calc-section" id="trig">
+      <div class="section-header">
+        <h2>Trigonometry Calculation</h2>
+        <p class="section-desc">All 6 trig functions — Degrees or Radians</p>
+      </div>
+
+      <div class="trig-mode-toggle">
+        <button class="tmode-btn active" id="degBtn" onclick="setTrigMode('deg')">Degrees °</button>
+        <button class="tmode-btn" id="radBtn" onclick="setTrigMode('rad')">Radians rad</button>
+      </div>
+
+      <div class="trig-input-area">
+        <div class="input-group big-input">
+          <label>Enter Angle</label>
+          <input type="number" id="trigAngle" placeholder="e.g. 45" />
+        </div>
+      </div>
+
+      <div class="trig-btn-grid">
+        <button class="trig-func-btn" onclick="calcTrig('sin')">sin θ</button>
+        <button class="trig-func-btn" onclick="calcTrig('cos')">cos θ</button>
+        <button class="trig-func-btn" onclick="calcTrig('tan')">tan θ</button>
+        <button class="trig-func-btn" onclick="calcTrig('cosec')">cosec θ</button>
+        <button class="trig-func-btn" onclick="calcTrig('sec')">sec θ</button>
+        <button class="trig-func-btn" onclick="calcTrig('cot')">cot θ</button>
+      </div>
+
+      <button class="calc-action-btn full-width" onclick="calcAllTrig()">Calculate All Functions</button>
+      <button class="reset-btn" onclick="resetTrig()">Reset</button>
+
+      <div class="trig-results" id="trigResults" style="display:none;"></div>
+    </section>
+
+    <!-- ===================== MODULE 5: NUMBER OPERATIONS ===================== -->
+    <section class="calc-section" id="numbers">
+      <div class="section-header">
+        <h2>Modulus & Number Operations</h2>
+        <p class="section-desc">Modulo, absolute, factorial, prime check & more</p>
+      </div>
+
+      <div class="num-ops-grid">
+
+        <!-- Modulus -->
+        <div class="op-card">
+          <h3>Modulus (a mod b)</h3>
+          <div class="input-row">
+            <input type="number" id="modA" placeholder="a" />
+            <span>mod</span>
+            <input type="number" id="modB" placeholder="b" />
+          </div>
+          <button class="mini-calc-btn" onclick="calcMod()">Calculate</button>
+          <div class="op-result" id="modResult"></div>
+        </div>
+
+        <!-- Absolute Value -->
+        <div class="op-card">
+          <h3>Absolute Value |x|</h3>
+          <div class="input-row">
+            <input type="number" id="absX" placeholder="Enter number" />
+          </div>
+          <button class="mini-calc-btn" onclick="calcAbs()">Calculate</button>
+          <div class="op-result" id="absResult"></div>
+        </div>
+
+        <!-- Floor / Ceil / Round -->
+        <div class="op-card">
+          <h3>Floor / Ceil / Round</h3>
+          <div class="input-row">
+            <input type="number" id="floorInput" placeholder="e.g. 3.7" step="any" />
+          </div>
+          <div class="mini-btn-row">
+            <button class="mini-calc-btn" onclick="calcFloor()">Floor</button>
+            <button class="mini-calc-btn" onclick="calcCeil()">Ceil</button>
+            <button class="mini-calc-btn" onclick="calcRound()">Round</button>
+          </div>
+          <div class="op-result" id="floorResult"></div>
+        </div>
+
+        <!-- Factorial -->
+        <div class="op-card">
+          <h3>Factorial (n!)</h3>
+          <div class="input-row">
+            <input type="number" id="factN" placeholder="e.g. 10" min="0" max="170" step="1" />
+          </div>
+          <button class="mini-calc-btn" onclick="calcFactorial()">Calculate n!</button>
+          <div class="op-result" id="factResult"></div>
+        </div>
+
+        <!-- Prime Check -->
+        <div class="op-card">
+          <h3>Prime Number Check</h3>
+          <div class="input-row">
+            <input type="number" id="primeN" placeholder="Enter integer" min="1" step="1" />
+          </div>
+          <button class="mini-calc-btn" onclick="checkPrime()">Check Prime</button>
+          <div class="op-result" id="primeResult"></div>
+        </div>
+
+        <!-- Even / Odd -->
+        <div class="op-card">
+          <h3>Even / Odd Check</h3>
+          <div class="input-row">
+            <input type="number" id="evenOddN" placeholder="Enter integer" step="1" />
+          </div>
+          <button class="mini-calc-btn" onclick="checkEvenOdd()">Check</button>
+          <div class="op-result" id="evenOddResult"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== MODULE 6: ENGINEERING UTILITIES ===================== -->
+    <section class="calc-section" id="AmanBanik">
+      <div class="section-header">
+        <h2>Engineering Utilities</h2>
+        <p class="section-desc">Logarithms, exponentials, scientific notation & base converters</p>
+      </div>
+
+      <div class="eng-grid">
+
+        <!-- Logarithm -->
+        <div class="op-card wide">
+          <h3>Logarithm Calculator</h3>
+          <div class="input-row">
+            <input type="number" id="logX" placeholder="Number (x > 0)" min="0.00001" step="any" />
+          </div>
+          <div class="mini-btn-row">
+            <button class="mini-calc-btn" onclick="calcLog('log')">log₁₀(x)</button>
+            <button class="mini-calc-btn" onclick="calcLog('ln')">ln(x)</button>
+            <button class="mini-calc-btn" onclick="calcLog('log2')">log₂(x)</button>
+          </div>
+          <div class="op-result" id="logResult"></div>
+        </div>
+
+        <!-- Exponential -->
+        <div class="op-card wide">
+          <h3>Exponential (eˣ & aˣ)</h3>
+          <div class="input-row">
+            <input type="number" id="expX" placeholder="Exponent x" step="any" />
+          </div>
+          <div class="mini-btn-row">
+            <button class="mini-calc-btn" onclick="calcExp('e')">eˣ</button>
+            <button class="mini-calc-btn" onclick="calcExp('2')">2ˣ</button>
+            <button class="mini-calc-btn" onclick="calcExp('10')">10ˣ</button>
+          </div>
+          <div class="op-result" id="expResult"></div>
+        </div>
+
+        <!-- Scientific Notation -->
+        <div class="op-card wide">
+          <h3>Scientific Notation Converter</h3>
+          <div class="input-row">
+            <input type="text" id="sciInput" placeholder="e.g. 123456.789 or 1.23e5" />
+          </div>
+          <div class="mini-btn-row">
+            <button class="mini-calc-btn" onclick="toSciNotation()">→ Scientific</button>
+            <button class="mini-calc-btn" onclick="fromSciNotation()">→ Standard</button>
+          </div>
+          <div class="op-result" id="sciResult"></div>
+        </div>
+
+        <!-- Binary ↔ Decimal -->
+        <div class="op-card wide">
+          <h3>Binary ↔ Decimal Converter</h3>
+          <div class="input-row">
+            <input type="text" id="binDecInput" placeholder="Enter binary or decimal" />
+          </div>
+          <div class="mini-btn-row">
+            <button class="mini-calc-btn" onclick="convertBin('toDecimal')">Binary → Decimal</button>
+            <button class="mini-calc-btn" onclick="convertBin('toBinary')">Decimal → Binary</button>
+          </div>
+          <div class="op-result" id="binDecResult"></div>
+        </div>
+
+        <!-- Hex ↔ Decimal -->
+        <div class="op-card wide">
+          <h3>Hexadecimal ↔ Decimal Converter</h3>
+          <div class="input-row">
+            <input type="text" id="hexDecInput" placeholder="Enter hex (e.g. FF) or decimal" />
+          </div>
+          <div class="mini-btn-row">
+            <button class="mini-calc-btn" onclick="convertHex('toDecimal')">Hex → Decimal</button>
+            <button class="mini-calc-btn" onclick="convertHex('toHex')">Decimal → Hex</button>
+          </div>
+          <div class="op-result" id="hexDecResult"></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="app-footer">
+    <p>Engineering calculator Built for Engineering Students · All calculations run locally in your browser</p>
+    <h3><b> Designed by BerozgarEngineers </b> </h3>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
